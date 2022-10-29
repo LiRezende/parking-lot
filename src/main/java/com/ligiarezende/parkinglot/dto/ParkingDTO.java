@@ -6,13 +6,13 @@ public class ParkingDTO implements Serializable {
 
     private Long id;
     private String plate;
-    private Boolean paid;
-    private Boolean left;
+    private boolean paid;
+    private boolean left;
 
     public ParkingDTO() {
     }
 
-    public ParkingDTO(Long id, String plate, Boolean paid, Boolean left) {
+    public ParkingDTO(Long id, String plate, boolean paid, boolean left) {
         this.id = id;
         this.plate = plate;
         this.paid = paid;
@@ -31,19 +31,19 @@ public class ParkingDTO implements Serializable {
         this.plate = plate;
     }
 
-    public Boolean getPaid() {
+    public boolean getPaid() {
         return paid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setPaid(boolean paid) {
         this.paid = paid;
     }
 
-    public Boolean getLeft() {
+    public boolean getLeft() {
         return left;
     }
 
-    public void setLeft(Boolean left) {
+    public void setLeft(boolean left) {
         this.left = left;
     }
 }

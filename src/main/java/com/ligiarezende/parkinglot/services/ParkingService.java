@@ -7,6 +7,7 @@ import com.ligiarezende.parkinglot.services.exceptions.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -27,8 +28,20 @@ public class ParkingService {
     @Transactional
     public ParkingDTO findById(Long id) {
         Optional<Parking> obj = parkingRepository.findById(id);
-        Parking entity = obj.orElseThrow(() -> new ResourceNotFoundException("Registro não encontrado."));
+        Parking entity = obj.orElseThrow(() -> new ResourceNotFoundException("Placa não encontrada."));
         return new ParkingDTO(entity);
+    }
+
+    @Transactional
+    public ParkingDTO updatePayment(Long id, ParkingDTO dto) {
+        try {
+            Parking entity = parkingRepository.getReferenceById(id);
+            entity.setPaid(dto.getPaid());
+            entity = parkingRepository.save(entity);
+            return new ParkingDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Registro #" + id + " não encontrado.");
+        }
     }
 
     private void dtoToEntity(ParkingDTO dto, Parking entity) {

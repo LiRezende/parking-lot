@@ -24,4 +24,10 @@ public class ParkingController {
         ParkingDTO dto = parkingService.findById(id);
         return ResponseEntity.ok().body(dto);
     }
+
+    @PutMapping(value = "/{id}/pay")
+    public ResponseEntity<ParkingDTO> update(@PathVariable Long id, @RequestBody ParkingDTO dto) {
+        dto = parkingService.updatePayment(id, dto);
+        return ResponseEntity.ok().body(dto);
+    }
 }

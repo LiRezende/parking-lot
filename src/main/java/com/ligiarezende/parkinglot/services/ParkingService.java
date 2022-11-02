@@ -2,8 +2,8 @@ package com.ligiarezende.parkinglot.services;
 
 import com.ligiarezende.parkinglot.dto.ParkingDTO;
 import com.ligiarezende.parkinglot.entities.Parking;
-import com.ligiarezende.parkinglot.repositries.ParkingRepository;
 import com.ligiarezende.parkinglot.services.exceptions.ResourceNotFoundException;
+import com.ligiarezende.parkinglot.repositries.ParkingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +19,15 @@ public class ParkingService {
 
     @Transactional
     public ParkingDTO create(ParkingDTO dto) {
-        Parking entity = new Parking();
-        dtoToEntity(dto, entity);
-        entity = parkingRepository.save(entity);
-        return new ParkingDTO(entity);
+
+        try {
+            Parking entity = new Parking();
+            dtoToEntity(dto, entity);
+            entity = parkingRepository.save(entity);
+            return new ParkingDTO(entity);
+        } catch(RuntimeException ex) {
+            throw new RuntimeException("Verifique o preenchimento dos campos.");
+        }
     }
 
     @Transactional

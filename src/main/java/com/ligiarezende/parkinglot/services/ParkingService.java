@@ -44,6 +44,23 @@ public class ParkingService {
         }
     }
 
+    @Transactional
+    public ParkingDTO updateExit(Long id, ParkingDTO dto) {
+        try {
+            Parking entity = parkingRepository.getReferenceById(id);
+
+            if (entity.getPaid()) {
+                entity.setLeftParking(dto.getLeftParking());
+                entity = parkingRepository.save(entity);
+            }
+
+            return new ParkingDTO(entity);
+
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Registro #" + id + " não encontrado.");
+        }
+    }
+
     private void dtoToEntity(ParkingDTO dto, Parking entity) {
         entity.setPlate(dto.getPlate());
         entity.setPaid(dto.getPaid());

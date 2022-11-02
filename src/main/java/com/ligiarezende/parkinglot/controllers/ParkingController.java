@@ -26,8 +26,14 @@ public class ParkingController {
     }
 
     @PutMapping(value = "/{id}/pay")
-    public ResponseEntity<ParkingDTO> update(@PathVariable Long id, @RequestBody ParkingDTO dto) {
+    public ResponseEntity<ParkingDTO> updatePayment(@PathVariable Long id, @RequestBody ParkingDTO dto) {
         dto = parkingService.updatePayment(id, dto);
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PutMapping(value = "/{id}/out")
+    public ResponseEntity<ParkingDTO> updateExit(@PathVariable Long id, @RequestBody ParkingDTO dto) {
+        dto = parkingService.updateExit(id, dto);
         return ResponseEntity.ok().body(dto);
     }
 }

@@ -30,7 +30,8 @@ public class Parking implements Serializable {
     }
 
     public String getPlate() {
-        return plate;
+
+        return "****".concat(plate.substring(4,8));
     }
 
     public void setPlate(String plate) {

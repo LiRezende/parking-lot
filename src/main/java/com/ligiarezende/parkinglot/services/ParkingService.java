@@ -40,9 +40,6 @@ public class ParkingService {
     public ParkingDTO updatePayment(Long id, ParkingDTO dto) {
         try {
             Parking entity = parkingRepository.getReferenceById(id);
-            entity.setEndTime(LocalDateTime.now());
-            Long timeTotal = ChronoUnit.MINUTES.between(entity.getStartTime(), entity.getEndTime());
-            entity.setTotalTime(timeTotal);
             entity.setPaid(dto.getPaid());
             entity = parkingRepository.save(entity);
             return new ParkingDTO(entity);

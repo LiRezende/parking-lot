@@ -10,6 +10,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(SpringExtension.class)
 public class ParkingServiceTest {
 
@@ -20,20 +23,33 @@ public class ParkingServiceTest {
     private ParkingRepository parkingRepository;
 
     @Test
-    public void createParking() {
-
+    public void findByIdShouldReturnProductDtoWhenValidId() {
         ParkingDTO parkingDTO = Factory.createParkingDTO();
 
-        ParkingDTO notNull = parkingService.create(parkingDTO);
-        Assertions.assertNotNull(notNull);
+        ParkingDTO result = parkingService.findById(1L);
+        when(parkingRepository.findById(any())).thenReturn();
+        Assertions.assertNotNull(result);
     }
 
-    @Test
-    public void shouldUpdatePaymentWhenReceivesValidParams() {
 
-        final ParkingDTO parkingDTO = Factory.createParkingDTO();
 
-        ParkingDTO notNull = parkingService.updatePayment(1L,parkingDTO);
-        Assertions.assertNotNull(notNull);
-    }
+//    @Test
+//    public void createParking() {
+//
+//        ParkingDTO parkingDTO = Factory.createParkingDTO();
+//
+//        when(parkingRepository.save(any())).thenReturn(parkingDTO);
+//
+//        ParkingDTO notNull = parkingService.create(parkingDTO);
+//        Assertions.assertNotNull(notNull);
+//    }
+//
+//    @Test
+//    public void shouldUpdatePaymentWhenReceivesValidParams() {
+//
+//        final ParkingDTO parkingDTO = Factory.createParkingDTO();
+//
+//        ParkingDTO notNull = parkingService.updatePayment(1L,parkingDTO);
+//        Assertions.assertNotNull(notNull);
+//    }
 }

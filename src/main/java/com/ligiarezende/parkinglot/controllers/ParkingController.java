@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/parking")
 public class ParkingController {
@@ -14,7 +16,7 @@ public class ParkingController {
     private ParkingService parkingService;
 
     @PostMapping
-    public ResponseEntity<ParkingDTO> create(@RequestBody ParkingDTO dto) {
+    public ResponseEntity<ParkingDTO> create(@Valid @RequestBody ParkingDTO dto) {
         dto = parkingService.create(dto);
         return ResponseEntity.ok().body(dto);
     }

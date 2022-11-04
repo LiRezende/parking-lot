@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
@@ -19,18 +19,13 @@ public class ParkingService {
 
     @Transactional
     public ParkingDTO create(ParkingDTO dto) {
-
-        try {
-            Parking entity = new Parking();
-            dtoToEntity(dto, entity);
-            entity = parkingRepository.save(entity);
-            return new ParkingDTO(entity);
-        } catch(RuntimeException ex) {
-            throw new RuntimeException("Verifique o preenchimento dos campos.");
-        }
+        Parking entity = new Parking();
+        dtoToEntity(dto, entity);
+        entity = parkingRepository.save(entity);
+        return new ParkingDTO(entity);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ParkingDTO findById(Long id) {
         Optional<Parking> obj = parkingRepository.findById(id);
         Parking entity = obj.orElseThrow(() -> new ResourceNotFoundException("Placa não encontrada."));

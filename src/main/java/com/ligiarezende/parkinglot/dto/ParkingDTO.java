@@ -2,13 +2,17 @@ package com.ligiarezende.parkinglot.dto;
 
 import com.ligiarezende.parkinglot.entities.Parking;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class ParkingDTO implements Serializable {
 
     private Long id;
+    @NotNull
     private String plate;
+    @NotNull
     private boolean paid;
+    @NotNull
     private boolean leftParking;
 
     public ParkingDTO() {

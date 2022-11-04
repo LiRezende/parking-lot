@@ -19,5 +19,8 @@ em:</p>
 <p>Para se conectar ao banco pela primeira vez é necessário acessar o PostgeSQL e criar uma nova base com o nome, usuário e senha especificados 
 no arquivo de application.properties. Após, ainda no PostgreSQL, é necessáro rodar a query:</p>
 
-`create table tb_parking (id bigserial not null, plate varchar(255), paid boolean, left_parking boolean);`
+`create table tb_parking (id bigserial not null, plate varchar(255), paid boolean, left_parking boolean, 
+start_time timestamp with time zone,
+end_time timestamp with time zone,
+total_time bigint);`
 

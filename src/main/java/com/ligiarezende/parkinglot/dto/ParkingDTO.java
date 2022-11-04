@@ -4,6 +4,7 @@ import com.ligiarezende.parkinglot.entities.Parking;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 public class ParkingDTO implements Serializable {
 
@@ -14,6 +15,12 @@ public class ParkingDTO implements Serializable {
     private boolean paid;
     @NotNull
     private boolean leftParking;
+
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
+
+    private Long totalTime;
 
     public ParkingDTO() {
     }
@@ -58,5 +65,29 @@ public class ParkingDTO implements Serializable {
 
     public void setLeftParking(boolean leftParking) {
         this.leftParking = leftParking;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Long getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(Long totalTime) {
+        this.totalTime = totalTime;
     }
 }

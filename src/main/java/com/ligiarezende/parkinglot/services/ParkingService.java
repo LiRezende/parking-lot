@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 @Service
@@ -21,6 +24,7 @@ public class ParkingService {
     public ParkingDTO create(ParkingDTO dto) {
         Parking entity = new Parking();
         dtoToEntity(dto, entity);
+        entity.setStartTime(LocalDateTime.now());
         entity = parkingRepository.save(entity);
         return new ParkingDTO(entity);
     }
@@ -36,6 +40,9 @@ public class ParkingService {
     public ParkingDTO updatePayment(Long id, ParkingDTO dto) {
         try {
             Parking entity = parkingRepository.getReferenceById(id);
+            entity.setEndTime(LocalDateTime.now());
+            Long timeTotal = ChronoUnit.MINUTES.between(entity.getStartTime(), entity.getEndTime());
+            entity.setTotalTime(timeTotal);
             entity.setPaid(dto.getPaid());
             entity = parkingRepository.save(entity);
             return new ParkingDTO(entity);

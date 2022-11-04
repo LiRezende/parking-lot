@@ -2,6 +2,8 @@ package com.ligiarezende.parkinglot.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -14,6 +16,12 @@ public class Parking implements Serializable {
     private String plate;
     private boolean paid;
     private boolean leftParking;
+
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
+
+    private Long totalTime;
 
     public Parking() {
     }
@@ -52,6 +60,30 @@ public class Parking implements Serializable {
 
     public void setLeftParking(boolean leftParking) {
         this.leftParking = leftParking;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public Long getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(Long totalTime) {
+        this.totalTime = totalTime;
     }
 
     @Override
